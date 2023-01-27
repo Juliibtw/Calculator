@@ -1,12 +1,12 @@
 <?php
 // define variables and set to empty values
-$input =  $ergebnis = "";
+$input =  $result = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(empty($_POST["inputfeld"])){
-        $inputErr = "Bitte geben sie eine gültige Rechnung an!";
+    if(empty($_POST["inputfield"])){
+        $inputErr = "Please enter a correct calculation!";
     } else{
-        $input = test_input($_POST["inputfeld"]);
+        $input = test_input($_POST["inputfield"]);
     }
 }
 
@@ -17,30 +17,30 @@ function test_input($data) {
 }
 $calc = explode(" ", $input);
 if(count($calc) != 3){
-    echo "Bitte geben sie eine gültige Rechnung ein.";
+    echo "Please enter a correct calculation";
 
 }else{
 switch( $calc[1]){
     case "+":
-        $ergebnis =  $calc[0]+ $calc[2];
+        $result =  $calc[0]+ $calc[2];
         break;
     case "-":
-        $ergebnis =  $calc[0] -  $calc[2];
+        $result =  $calc[0] -  $calc[2];
         break;
     case "*":        
-        $ergebnis =  $calc[0] *  $calc[2];
+        $result =  $calc[0] *  $calc[2];
         break;
     case "/":
         if($calc[2] == 0){
-            echo "Division durch null nicht möglich!";
+            echo "Division by zero not possible!";
             break;
         }
-        $ergebnis =  $calc[0] /  $calc[2];
+        $result =  $calc[0] /  $calc[2];
         break;
     default:
     echo "Error";
 }
-echo $ergebnis;
+echo $result;
 }
 ?>
 <!DOCTYPE html>
@@ -48,14 +48,14 @@ echo $ergebnis;
     <head></head>
     <body>
         <form method="post" action="prorechner.php">
-            <label for="fnumber">Bitte geben Sie Ihre Rechnung ein!</label><br>
-            <input type="text" id="inputfeld" name="inputfeld"><br>
+            <label for="fnumber">Please enter your calculation!</label><br>
+            <input type="text" id="inputfeld" name="inputfield"><br>
             <?php
             if(isset($inputErr)){
                 echo '<span class="error">*'.$inputErr.'</span><br>';
             }
             ?>
-            <input type="submit" value="berechnen">
+            <input type="submit" value="calculate">
         </form>
     </body>
 </html>
