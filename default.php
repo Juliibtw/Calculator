@@ -1,20 +1,20 @@
 <?php
 // define variables and set to empty values
-$fnumber = $snumber = $zeichen =$ergebnis = "";
+$fnumber = $snumber = $sign =$result = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($_POST["fnumber"])){
-        $fnumberErr = "Bitte geben Sie eine Zahl an!";
+        $fnumberErr = "Please enter a number!";
     } else{
         $fnumber = test_input($_POST["fnumber"]);
     }
     if(empty($_POST["snumber"])){
-        $snumberErr = "Bitte geben Sie eine Zahl an!";
+        $snumberErr = "Please enter a number!";
     } else{
         $snumber = test_input($_POST["snumber"]);
     }
-    if(empty($_POST["zeichen"])){
-        $zeichenErr = "Bitte geben Sie ein Rechenzeichen an!";
+    if(empty($_POST["sign"])){
+        $signErr = "Please enter a calculation sign!";
     } else{
         $zeichen = test_input($_POST["zeichen"]);
     }  
@@ -27,30 +27,30 @@ function test_input($data) {
 }
 settype($snumber, "integer");
 settype($fnumber, "integer");
-switch($zeichen){
+switch($sign ){
     case "+":
-        $ergebnis = $fnumber + $snumber;
+        $result = $fnumber + $snumber;
         break;
     case "-":
-        $ergebnis = $fnumber - $snumber;
+        $result = $fnumber - $snumber;
         break;
     case "*":        
-        $ergebnis = $fnumber * $snumber;
+        $result = $fnumber * $snumber;
         break;
     case "/":
-        $ergebnis = $fnumber / $snumber;
+        $result = $fnumber / $snumber;
         break;
     default:
     echo "Error";
 }
-echo $ergebnis;
+echo $result;
 ?>
 <!Doctype html>
 <html>
-    <head><title>Taschenrechner</title></head>
+    <head><title>Calculator</title></head>
     <body>
         <form method="post" action="default.php">
-            <label for="fnumber">erste Zahl</label><br>
+            <label for="fnumber">first Number</label><br>
             <input type="number" id="fnumber" name="fnumber">
             <?php
             if(isset($fnumberErr)){
@@ -58,29 +58,29 @@ echo $ergebnis;
             }
             ?>
             <br>
-            <input type="radio" id="+" name="zeichen" value="+">
+            <input type="radio" id="+" name="sign" value="+">
             <label for="+">+</label>
             <br>
-            <input type="radio" id="-" name="zeichen" value="-">
+            <input type="radio" id="-" name="sign" value="-">
             <label for="-">-</label><br>
-            <input type="radio" id="*" name="zeichen" value="*">
+            <input type="radio" id="*" name="sign" value="*">
             <label for="*">*</label><br>
-            <input type="radio" id="/" name="zeichen" value="/">
+            <input type="radio" id="/" name="sign" value="/">
             <label for="/">/</label>
             <?php
             if(isset($zeichenErr)){
-                echo '<span class="error">*'.$zeichenErr.'</span>';
+                echo '<span class="error">*'.$signErr.'</span>';
             }
             ?>
             <br>
-            <label for="snumber">zweite Zahl</label><br>
+            <label for="snumber">second number</label><br>
             <input type="number" id="snumber" name="snumber"><br>
             <?php
             if(isset($snumberErr)){
                 echo '<span class="error">*'.$snumberErr.'</span>';
             }
             ?>
-            <input type="submit" value="berechnen">
+            <input type="submit" value="calculate">
         </form>
     </body>
 </html>    
